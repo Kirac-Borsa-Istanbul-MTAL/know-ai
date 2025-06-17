@@ -10,19 +10,16 @@ class AuthMiddleware {
 
     public static function requireAuth() {
         if (!self::isLoggedIn()) {
-            $currentPath = $_SERVER['REQUEST_URI'];
-            
-            if (strpos($currentPath, 'login') === false && strpos($currentPath, 'register') === false) {
-                header('Location: /login');
-                exit();
-            }
+            header('Location: ' . url('login'));
+            exit();
         }
     }
 
     public static function redirectIfLoggedIn() {
         if (self::isLoggedIn()) {
-            header('Location: /dashboard');
+            header('Location: ' . url('dashboard'));
             exit();
         }
     }
 }
+?>

@@ -1,16 +1,16 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
-    var_dump($username, $password);
-    if ($username === 'admin@mail.com' && $password === 'password') {
+    var_dump($email, $password);
+    if ($email === 'admin@mail.com' && $password === 'password') {
         $_SESSION['user_id'] = 1;
         $_SESSION['username'] = $username;
-        header('Location: /dashboard');
+        header('Location: ' . url('dashboard'));
         exit();
     } else {
         $_SESSION['error'] = 'Invalid username or password';
-        header('Location: /login');
+        header('Location: ' . url('login'));
         exit();
     }
 }

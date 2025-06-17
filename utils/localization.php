@@ -2,12 +2,20 @@
 
 $translations = [
     'welcome' => [
-        'tr' => 'Know AI\'a Hoşgeldiniz',
-        'en' => 'Welcome to Know AI',
+        'tr' => 'Hoşgeldiniz,',
+        'en' => 'Welcome,',
     ],
     'login' => [
         'tr' => 'Lütfen hesabınıza giriş yapın',
         'en' => 'Please log in to your account',
+    ],
+    'register' => [
+        'tr' => 'Lütfen hesabınızı oluşturun',
+        'en' => 'Please create your account',
+    ],
+    'name' => [
+        'tr' => 'Adınız',
+        'en' => 'Your Name',
     ],
     'email' => [
         'tr' => 'E-posta',
@@ -25,9 +33,17 @@ $translations = [
         'tr' => 'Hesabınız yok mu?',
         'en' => 'Don\'t have an account?',
     ],
+    'already_have_account' => [
+        'tr' => 'Zaten hesabınız var mı?',
+        'en' => 'Already have an account?',
+    ],
     'login_button' => [
         'tr' => 'Giriş Yap',
         'en' => 'Log In',
+    ],
+    'register_button' => [
+        'tr' => 'Kayıt Ol',
+        'en' => 'Register',
     ],
     '404_heading' => [
         'tr' => 'Sayfa Bulunamadı',

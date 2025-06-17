@@ -49,12 +49,17 @@ $current_theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
     <div class="h-full flex items-center justify-center">
         <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-96">
             <div class="text-center mb-8 flex flex-col items-center">
-                <img src="./assets/kirac-bist-logo.png" alt="Kıraç.ai Logo" class="h-16 mb-4 mx-auto">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-white"><?php echo translate('welcome', $current_lang); ?></h2>
-                <p class="text-gray-600 dark:text-gray-300"><?php echo translate('login', $current_lang); ?></p>
+                <img src="./assets/know-ai.png" alt="Know.ai Logo" class="h-32 mx-auto mb-2">
+                <h2 class="text-center text-gray-800 dark:text-white"><?php echo translate('welcome', $current_lang); ?></h2>
+                <p class="text-gray-600 dark:text-gray-300"><?php echo translate('register', $current_lang); ?></p>
             </div>
 
-            <form class="space-y-6" action="modules/login/controller/login.php" method="POST">
+            <form class="space-y-6" action="/register" method="POST">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo translate('name', $current_lang); ?></label>
+                    <input type="text" id="name" name="name" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo translate('email', $current_lang); ?></label>
                     <input type="email" id="email" name="email" required
@@ -73,12 +78,12 @@ $current_theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
                             class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                         <label for="remember" class="ml-2 block text-sm text-gray-700 dark:text-gray-300"><?php echo translate('remember', $current_lang); ?></label>
                     </div>
-                    <a href="#" class="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"><?php echo translate('dont_have_account', $current_lang); ?></a>
+                    <a href="login" class="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"><?php echo translate('already_have_account', $current_lang); ?></a>
                 </div>
 
                 <button type="submit"
                     class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    <?php echo translate('login_button', $current_lang); ?>
+                    <?php echo translate('register_button', $current_lang); ?>
                 </button>
             </form>
         </div>

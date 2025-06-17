@@ -21,7 +21,7 @@ $current_theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
 <body class="bg-gray-100 dark:bg-gray-900 h-screen">
     <div class="h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-            <img src="./assets/kirac-bist-logo.png" alt="Kıraç.ai Logo" class="h-16 mb-6 mx-auto">
+            <img src="./assets/know-ai.png" alt="Kıraç.ai Logo" class="h-32 mb-6 mx-auto">
             <p class="text-6xl sm:text-8xl font-bold text-indigo-600 dark:text-indigo-400">404</p>
 
             <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
@@ -33,7 +33,7 @@ $current_theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
             </p>
             
             <div class="mt-10 flex items-center justify-center gap-x-6">
-                <a href="/index.php" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <a href="<?php echo url('dashboard'); ?>" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     <?php echo translate('404_button', $current_lang); ?>
                 </a>
             </div>

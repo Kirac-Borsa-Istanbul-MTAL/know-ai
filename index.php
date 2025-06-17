@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/utils/url-formatter.php';
+
 if (preg_match('/\.(?:css|js|jpg|jpeg|png|gif)$/', $_SERVER["REQUEST_URI"])) {
     $filePath = __DIR__ . $_SERVER["REQUEST_URI"];
     if (file_exists($filePath)) {
@@ -26,8 +28,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$request = $_SERVER['REQUEST_URI'];
-$path = parse_url($request, PHP_URL_PATH);
+$base_path = get_base_path();
+$request_uri = $_SERVER['REQUEST_URI'];
+$request_path = parse_url($request_uri, PHP_URL_PATH);
+
+$path = '/';
+if (strlen($base_path) > 0 && strpos($request_path, $base_path) === 0) {
+    $path = substr($request_path, strlen($base_path));
+} else {
+    $path = $request_path;
+}
+
+if (empty($path)) {
+    $path = '/';
+}
 
 $publicRoutes = [
     '/login',
@@ -54,7 +68,7 @@ switch ($path) {
         if (AuthMiddleware::isLoggedIn()) {
             require __DIR__ . '/modules/main/views/dashboard.php';
         } else {
-            header('Location: /login');
+            header('Location: ' . url('login'));
             exit();
         }
         break;
@@ -62,7 +76,7 @@ switch ($path) {
     case '/login':
         AuthMiddleware::redirectIfLoggedIn();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/modules/login/controller/login_controller.php';
+            require __DIR__ . '/modules/login/controller/login.php';
         } else {
             require __DIR__ . '/modules/login/views/login.php';
         }
@@ -74,7 +88,7 @@ switch ($path) {
         break;
 
     case '/dashboard':
-        require __DIR__ . '/modules/main/views/dashboard.php';
+        require __DIR__ . '/modules/main/views/main.php';
         break;
 
     default:
