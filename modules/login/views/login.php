@@ -1,7 +1,4 @@
 <?php
-require_once __DIR__ . '/../../../utils/localization.php';
-require_once __DIR__ . '/../../../config/app.php';
-
 if (isset($_GET['lang']) && ($_GET['lang'] === 'en' || $_GET['lang'] === 'tr')) {
     setcookie('preferred_language', $_GET['lang'], time() + (86400 * 30), url('/'));
     header('Location: ' . strtok($_SERVER["REQUEST_URI"], '?'));
@@ -74,7 +71,7 @@ $current_theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
                             class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                         <label for="remember" class="ml-2 block text-sm text-gray-700 dark:text-gray-300"><?php echo translate('remember', $current_lang); ?></label>
                     </div>
-                    <a href="/register" class="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"><?php echo translate('dont_have_account', $current_lang); ?></a>
+                    <a href="<?php echo url('/register'); ?>" class="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"><?php echo translate('dont_have_account', $current_lang); ?></a>
                 </div>
 
                 <button type="submit"

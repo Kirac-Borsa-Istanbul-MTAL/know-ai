@@ -1,5 +1,8 @@
 <?php
+require_once __DIR__ . '/config/mysql.php';
+require_once __DIR__ . '/middleware/AuthMiddleware.php';
 require_once __DIR__ . '/utils/url-formatter.php';
+require_once __DIR__ . '/utils/localization.php';
 
 if (preg_match('/\.(?:css|js|jpg|jpeg|png|gif)$/', $_SERVER["REQUEST_URI"])) {
     $filePath = __DIR__ . $_SERVER["REQUEST_URI"];
@@ -22,7 +25,7 @@ if (preg_match('/\.(?:css|js|jpg|jpeg|png|gif)$/', $_SERVER["REQUEST_URI"])) {
     }
 }
 
-require_once __DIR__ . '/middleware/AuthMiddleware.php';
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -84,7 +87,11 @@ switch ($path) {
 
     case '/register':
         AuthMiddleware::redirectIfLoggedIn();
-        require __DIR__ . '/modules/login/views/register.php';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            require __DIR__ . '/modules/login/controller/register.php';
+        } else {
+            require __DIR__ . '/modules/login/views/register.php';
+        }
         break;
 
     case '/dashboard':
