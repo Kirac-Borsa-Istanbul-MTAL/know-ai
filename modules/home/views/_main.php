@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Kıraç.ai</title>
   <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -18,7 +18,7 @@
   </div>
   
   <div class="app">
-    <center><image src="./kirac-bist-logo.png" width="500px" style="z-index: 1000; position: relative;"></image></center>
+    <center><image src="./assets/kirac-bist-logo.png" width="500px" style="z-index: 1000; position: relative;"></image></center>
     <div class="header">
       <div class="menu-circle" style="user-select: none;">
         Kıraç.ai
@@ -101,9 +101,9 @@
     </div>
     <div class="overlay-app"></div>
   </div>
-  <!-- partial -->
+  
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="./script.js"></script>
+  <script src="./js/index.js"></script>
 
 </body>
 
