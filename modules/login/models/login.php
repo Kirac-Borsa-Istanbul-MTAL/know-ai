@@ -23,3 +23,4 @@ class LoginModel
         return password_verify($password, $hashedPassword);
     }
 }
+?>

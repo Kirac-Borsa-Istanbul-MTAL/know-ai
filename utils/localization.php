@@ -61,9 +61,33 @@ $translations = [
         'tr' => 'Ana Sayfa',
         'en' => 'Home',
     ],
+    'statistics' => [
+        'tr' => 'İstatistikler',
+        'en' => 'Statistics',
+    ],
+    'about_us' => [
+        'tr' => 'Hakkımızda',
+        'en' => 'About Us',
+    ],
     'profile' => [
         'tr' => 'Profil',
         'en' => 'Profile',
+    ],
+    'language' => [
+        'tr' => 'Dil',
+        'en' => 'Language',
+    ],
+    'theme' => [
+        'tr' => 'Tema',
+        'en' => 'Theme',
+    ],
+    'dark_mode' => [
+        'tr' => 'Karanlık Mod',
+        'en' => 'Dark Mode',
+    ],
+    'light_mode' => [
+        'tr' => 'Aydınlık Mod',
+        'en' => 'Light Mode',
     ],
     'settings' => [
         'tr' => 'Ayarlar',
