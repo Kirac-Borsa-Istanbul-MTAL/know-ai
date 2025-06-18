@@ -88,9 +88,9 @@ switch ($path) {
     case '/register':
         AuthMiddleware::redirectIfLoggedIn();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/modules/login/controller/register.php';
+            require __DIR__ . '/modules/register/controller/register.php';
         } else {
-            require __DIR__ . '/modules/login/views/register.php';
+            require __DIR__ . '/modules/register/views/register.php';
         }
         break;
 
