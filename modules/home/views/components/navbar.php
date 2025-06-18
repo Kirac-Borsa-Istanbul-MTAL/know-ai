@@ -1,5 +1,5 @@
 <?php
-function renderNavbar($current_lang, $current_theme)
+function renderNavbar($current_lang)
 {
     $userName = isset($_SESSION['name']) ? $_SESSION['name'] : 'User';
     $userEmail = isset($_SESSION['email']) ? $_SESSION['email'] : '';

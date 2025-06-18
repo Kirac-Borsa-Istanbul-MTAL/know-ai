@@ -102,8 +102,28 @@ $translations = [
         'en' => 'Toggle Theme',
     ],
     'search' => [
-        'tr' => 'Ara',
-        'en' => 'Search',
+        'tr' => 'Ara...',
+        'en' => 'Search...',
+    ],
+    'change_to_your_own_style' => [
+        'tr' => 'Kendi Tarzına Değiştir',
+        'en' => 'Change To Your Own Style',
+    ],
+    'search_settings' => [
+        'tr' => 'Arama Ayarları',
+        'en' => 'Search Settings',
+    ],
+    'search_filter_type' => [
+        'tr' => 'Türe göre filtrele',
+        'en' => 'Filter by type',
+    ],
+    'search_sort_order' => [
+        'tr' => 'Sıralama düzeni',
+        'en' => 'Sort order',
+    ],
+    'search_advanced_options' => [
+        'tr' => 'Gelişmiş seçenekler',
+        'en' => 'Advanced options',
     ],
     'new_question' => [
         'tr' => 'Yeni Soru',
@@ -127,5 +147,7 @@ function translate($key, $lang)
         return $translations[$key][$lang];
     }
     
-    return $key;
+    return $key; 
 }
+
+?>
