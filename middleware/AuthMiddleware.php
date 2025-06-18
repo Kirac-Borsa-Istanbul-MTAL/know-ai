@@ -17,7 +17,7 @@ class AuthMiddleware {
 
     public static function redirectIfLoggedIn() {
         if (self::isLoggedIn()) {
-            header('Location: ' . url('dashboard'));
+            header('Location: ' . url('home'));
             exit();
         }
     }

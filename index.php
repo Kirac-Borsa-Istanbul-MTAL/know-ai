@@ -69,7 +69,7 @@ if (!$isPublicRoute) {
 switch ($path) {
     case '/':
         if (AuthMiddleware::isLoggedIn()) {
-            require __DIR__ . '/modules/main/views/dashboard.php';
+            require __DIR__ . '/modules/home/views/home.php';
         } else {
             header('Location: ' . url('login'));
             exit();
@@ -94,8 +94,18 @@ switch ($path) {
         }
         break;
 
-    case '/dashboard':
-        require __DIR__ . '/modules/main/views/main.php';
+    case '/home':
+        require __DIR__ . '/modules/home/views/home.php';
+        break;
+
+    case '/logout':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            session_destroy();
+            setcookie('remember', '', time() - 3600, '/');
+            header('Location: ' . url('login'));
+            exit();
+        }
+        header('Location: ' . url('home'));
         break;
 
     default:

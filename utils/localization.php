@@ -57,6 +57,42 @@ $translations = [
         'tr' => 'Ana Sayfaya Dön',
         'en' => 'Go Back Home',
     ],
+    'home' => [
+        'tr' => 'Ana Sayfa',
+        'en' => 'Home',
+    ],
+    'profile' => [
+        'tr' => 'Profil',
+        'en' => 'Profile',
+    ],
+    'settings' => [
+        'tr' => 'Ayarlar',
+        'en' => 'Settings',
+    ],
+    'logout' => [
+        'tr' => 'Çıkış Yap',
+        'en' => 'Logout',
+    ],
+    'theme_toggle' => [
+        'tr' => 'Tema Değiştir',
+        'en' => 'Toggle Theme',
+    ],
+    'search' => [
+        'tr' => 'Ara',
+        'en' => 'Search',
+    ],
+    'new_question' => [
+        'tr' => 'Yeni Soru',
+        'en' => 'New Question',
+    ],
+    'ask_anything' => [
+        'tr' => 'Herhangi bir şey sorabilirsiniz',
+        'en' => 'You can ask anything',
+    ],
+    'ask' => [
+        'tr' => 'Sor',
+        'en' => 'Ask',
+    ],
 ];
 
 function translate($key, $lang)

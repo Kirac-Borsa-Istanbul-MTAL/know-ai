@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $result['user_id'];
         $_SESSION['email'] = $result['email'];
         $_SESSION['name'] = $result['name'];
-        header('Location: ' . url('dashboard'));
+        header('Location: ' . url('home'));
         exit();
     } else {
         $_SESSION['error'] = $result['error'];

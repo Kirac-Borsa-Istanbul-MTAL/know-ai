@@ -33,7 +33,7 @@ $current_theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
             </p>
             
             <div class="mt-10 flex items-center justify-center gap-x-6">
-                <a href="<?php echo url('dashboard'); ?>" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <a href="<?php echo url('home'); ?>" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     <?php echo translate('404_button', $current_lang); ?>
                 </a>
             </div>
