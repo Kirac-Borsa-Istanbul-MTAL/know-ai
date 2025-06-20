@@ -79,7 +79,7 @@ switch ($path) {
     case '/login':
         AuthMiddleware::redirectIfLoggedIn();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/modules/login/controller/login.php';
+            require __DIR__ . '/modules/login/controllers/login.php';
         } else {
             require __DIR__ . '/modules/login/views/login.php';
         }
@@ -88,7 +88,7 @@ switch ($path) {
     case '/register':
         AuthMiddleware::redirectIfLoggedIn();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            require __DIR__ . '/modules/register/controller/register.php';
+            require __DIR__ . '/modules/register/controllers/register.php';
         } else {
             require __DIR__ . '/modules/register/views/register.php';
         }
@@ -96,6 +96,10 @@ switch ($path) {
 
     case '/home':
         require __DIR__ . '/modules/home/views/home.php';
+        break;
+
+    case '/home/controllers/search_settings.php':
+        require __DIR__ . '/modules/home/controllers/search_settings.php';
         break;
 
     case '/logout':

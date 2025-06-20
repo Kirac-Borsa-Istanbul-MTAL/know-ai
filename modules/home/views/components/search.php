@@ -20,17 +20,32 @@ function renderSearch($current_lang)
             </div>
 
             <div id="search-settings-menu"
-                class="hidden absolute right-0 mt-2 w-56 rounded-md shadow-lg py-1 bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 opacity-0 scale-95 transform transition-all duration-200 ease-out origin-top-right z-10">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <?php echo htmlspecialchars(translate('search_filter_type', $current_lang)); ?>
-                </a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <?php echo htmlspecialchars(translate('search_sort_order', $current_lang)); ?>
-                </a>
-                <div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <?php echo htmlspecialchars(translate('search_advanced_options', $current_lang)); ?>
-                </a>
+                class="hidden absolute right-0 mt-2 w-64 rounded-md shadow-lg py-1 bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 opacity-0 scale-95 transform transition-all duration-200 ease-out origin-top-right z-10">
+                <div class="px-4 py-2">
+                    <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">Arama Seviyesi</h3>
+                    <div class="mt-2 space-y-2">
+                        <?php
+                        $searchLevels = [
+                            ['id' => 1, 'name' => 'Başlangıç'],
+                            ['id' => 2, 'name' => 'Orta'],
+                            ['id' => 3, 'name' => 'İleri'],
+                            ['id' => 4, 'name' => 'Uzman'],
+                            ['id' => 5, 'name' => 'Profesyonel']
+                        ];
+                        $currentLevel = $_COOKIE['searchLevel'] ?? 1;
+                        foreach ($searchLevels as $level) {
+                            $isChecked = $currentLevel == $level['id'] ? 'checked' : '';
+                        ?>
+                            <div class="flex items-center">
+                                <input type="radio" id="level-<?php echo $level['id']; ?>" name="searchLevel" value="<?php echo $level['id']; ?>" <?php echo $isChecked; ?>
+                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 dark:border-gray-600">
+                                <label for="level-<?php echo $level['id']; ?>" class="ml-2 text-sm text-gray-700 dark:text-gray-200">
+                                    <?php echo htmlspecialchars($level['name']); ?>
+                                </label>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -41,6 +56,30 @@ function renderSearch($current_lang)
         let isSearchSettingsMenuOpen = false;
 
         if (searchSettingsButton && searchSettingsMenu) {
+            const searchLevelRadios = document.querySelectorAll('input[name="searchLevel"]');
+            searchLevelRadios.forEach(radio => {
+                radio.addEventListener('change', function(event) {
+                    const selectedLevel = event.target.value;
+                    
+                    fetch('<?php echo url("/home/controllers/search_settings.php"); ?>', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'searchLevel=' + selectedLevel
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.success) {
+                            console.error('Error updating search level:', data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+            });
+
             searchSettingsButton.addEventListener('click', function(event) {
                 event.stopPropagation();
                 toggleSearchSettingsMenu();
