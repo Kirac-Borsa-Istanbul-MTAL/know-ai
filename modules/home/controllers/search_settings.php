@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../models/search.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $searchLevel = $_POST['searchLevel'] ?? 1;
     $userId = $_SESSION['user_id'] ?? null;

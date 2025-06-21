@@ -102,6 +102,14 @@ switch ($path) {
         require __DIR__ . '/modules/home/controllers/search_settings.php';
         break;
 
+    case '/api.php':
+        require __DIR__ . '/services/gemini/api.php';
+        break;
+
+    case '/services/gemini/api.php':
+        require __DIR__ . '/services/gemini/api.php';
+        break;
+
     case '/logout':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_destroy();

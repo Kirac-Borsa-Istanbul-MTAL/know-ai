@@ -137,6 +137,30 @@ $translations = [
         'tr' => 'Sor',
         'en' => 'Ask',
     ],
+    'search_level' => [
+        'tr' => 'Arama Seviyesi',
+        'en' => 'Search Level',
+    ],
+    'beginner' => [
+        'tr' => 'Başlangıç',
+        'en' => 'Beginner',
+    ],
+    'intermediate' => [
+        'tr' => 'Orta',
+        'en' => 'Intermediate',
+    ],
+    'advanced' => [
+        'tr' => 'İleri',
+        'en' => 'Advanced',
+    ],
+    'expert' => [
+        'tr' => 'Uzman',
+        'en' => 'Expert',
+    ],
+    'professional' => [
+        'tr' => 'Profesyonel',
+        'en' => 'Professional',
+    ],
 ];
 
 function translate($key, $lang)

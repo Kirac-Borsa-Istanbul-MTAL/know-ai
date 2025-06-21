@@ -18,7 +18,6 @@ function staticPrompt($search, $language, $level) {
         
         **JSON Formatı:**  
         
-        ```json  
         {
             \"search\": \"{$search}\",
             \"level\": \"{$level}\",
@@ -47,7 +46,6 @@ function staticPrompt($search, $language, $level) {
                 }
             }
         }
-        ```
     ";
 
     return $prompt;
