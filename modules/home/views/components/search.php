@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/loading-spinner.php';
+require_once __DIR__ . '/../../models/search.php';
+
 function renderSearch($current_lang)
 {
 ?>
@@ -7,7 +9,8 @@ function renderSearch($current_lang)
         <div class="relative">
             <input type="text" id="search-input"
                 class="w-full px-4 py-2 pr-10 sm:pr-60 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="<?php echo htmlspecialchars(translate('search', $current_lang)); ?>">
+                placeholder="<?php echo htmlspecialchars(translate('search', $current_lang)); ?>"
+                autocomplete="off">
 
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 space-x-2">
                 <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap hidden sm:inline">
@@ -33,7 +36,17 @@ function renderSearch($current_lang)
                             ['id' => 4, 'name' => 'expert'],
                             ['id' => 5, 'name' => 'professional']
                         ];
+                        $searchModel = new SearchModel();
+                        $userId = $_SESSION['user_id'] ?? null;
                         $currentLevel = $_COOKIE['searchLevel'] ?? 1;
+
+                        if ($userId) {
+                            $userLevel = $searchModel->getUserSearchLevel($userId);
+                            if ($userLevel['success'] && isset($userLevel['level'])) {
+                                $currentLevel = $userLevel['level'];
+                            }
+                        }
+
                         foreach ($searchLevels as $level) {
                             $isChecked = $currentLevel == $level['id'] ? 'checked' : '';
                         ?>
@@ -74,6 +87,8 @@ function renderSearch($current_lang)
                     const searchQuery = searchInput.value.trim();
 
                     if (searchQuery) {
+                        searchInput.blur();
+                        
                         loadingSpinner.classList.remove('hidden');
 
                         fetch('<?php echo url("/services/gemini/api.php"); ?>', {
@@ -196,6 +211,11 @@ function renderSearch($current_lang)
             const contentSources = document.getElementById('content-sources');
             const contentQuestions = document.getElementById('content-questions');
 
+            document.addEventListener('submit', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
             const showNewContent = () => {
                 searchResult.classList.remove('hidden');
                 searchResult.classList.add('scale-95', 'opacity-0');
@@ -246,7 +266,7 @@ function renderSearch($current_lang)
                                     class="mt-3 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 
                                     text-white rounded transition-colors duration-200 
                                     focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700">
-                                    Check Answer
+                                    <?php echo htmlspecialchars(translate('check_answer', $current_lang)); ?>
                                 </button>
                             `;
                         } else {
@@ -258,13 +278,14 @@ function renderSearch($current_lang)
                                         text-gray-900 dark:text-white bg-white dark:bg-gray-700 
                                         rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500
                                         focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 
-                                        focus:border-indigo-500 dark:focus:border-indigo-400">
+                                        focus:border-indigo-500 dark:focus:border-indigo-400"
+                                        onkeypress="return event.key != 'Enter';">
                                 </div>
                                 <button onclick="checkFillInBlank(${index}, '${q.answer}')" 
                                     class="mt-3 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 
                                     text-white rounded transition-colors duration-200 
                                     focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700">
-                                    Check Answer
+                                    <?php echo htmlspecialchars(translate('check_answer', $current_lang)); ?>
                                 </button>
                             `;
                         }
@@ -297,7 +318,7 @@ function renderSearch($current_lang)
         function checkAnswer(questionIndex, correctAnswer) {
             const selectedAnswer = document.querySelector(`input[name="q${questionIndex}"]:checked`);
             if (!selectedAnswer) {
-                alert('Please select an answer');
+                showNotification(false, '<?php echo htmlspecialchars(translate('please_select_an_answer', $current_lang)); ?>');
                 return;
             }
 
@@ -307,21 +328,30 @@ function renderSearch($current_lang)
 
         function checkFillInBlank(questionIndex, correctAnswer) {
             const userAnswer = document.getElementById(`q${questionIndex}_answer`).value.trim();
+            if (userAnswer == '') {
+                showNotification(false, '<?php echo htmlspecialchars(translate('please_select_an_answer', $current_lang)); ?>');
+                return;
+            }
             const isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
             showNotification(isCorrect);
         }
 
-        function showNotification(isCorrect) {
-            const message = isCorrect ? 'Correct!' : 'Incorrect. Try again!';
-
+        function showNotification(isCorrect, notificationMessage) {
             const notification = document.createElement('div');
             notification.className = `fixed bottom-4 right-4 p-4 rounded-lg shadow-lg ${
                 isCorrect 
                     ? 'bg-green-100 dark:bg-green-800 text-green-900 dark:text-green-100' 
                     : 'bg-red-100 dark:bg-red-800 text-red-900 dark:text-red-100'
             } transform transition-all duration-300 ease-out opacity-0 translate-y-2`;
-            notification.textContent = message;
             
+            if(notificationMessage) {
+                notification.textContent = notificationMessage;
+            } else {
+                notification.textContent = isCorrect 
+                    ? '<?php echo htmlspecialchars(translate('true', $current_lang)); ?>' 
+                    : '<?php echo htmlspecialchars(translate('false', $current_lang)); ?>';
+            }
+
             document.body.appendChild(notification);
             
             setTimeout(() => {

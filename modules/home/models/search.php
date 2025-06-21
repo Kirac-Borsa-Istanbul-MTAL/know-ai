@@ -20,5 +20,27 @@ class SearchModel {
             'error' => $error
         ];
     }
+
+    public function getUserSearchLevel($userId) {
+        $stmt = $this->conn->prepare("SELECT searchLevel FROM users WHERE id = ?");
+        $stmt->bind_param("i", $userId);
+        
+        $success = $stmt->execute();
+        $result = $stmt->get_result();
+        $level = null;
+        
+        if ($success && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $level = $row['searchLevel'];
+        }
+        
+        $stmt->close();
+        
+        return [
+            'success' => $success,
+            'level' => $level,
+            'error' => $success ? null : $this->conn->error
+        ];
+    }
 }
 ?>

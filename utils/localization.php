@@ -161,6 +161,30 @@ $translations = [
         'tr' => 'Profesyonel',
         'en' => 'Professional',
     ],
+    'sources' => [
+        'tr' => 'Kaynaklar',
+        'en' => 'Sources',
+    ],
+    'questions' => [
+        'tr' => 'Sorular',
+        'en' => 'Questions',
+    ],
+    'check_answer' => [
+        'tr' => 'Cevabı kontrol et',
+        'en' => 'Check Answer',
+    ],
+    'true' => [
+        'tr' => 'Doğru, tebrikler!',
+        'en' => 'True, congratulations!',
+    ],
+    'false' => [
+        'tr' => 'Yanlış, lütfen tekrar deneyin!',
+        'en' => 'False, please try again!',
+    ],
+    'please_select_an_answer' => [
+        'tr' => 'Lütfen bir cevap seçin',
+        'en' => 'Please select an answer',
+    ],
 ];
 
 function translate($key, $lang)
