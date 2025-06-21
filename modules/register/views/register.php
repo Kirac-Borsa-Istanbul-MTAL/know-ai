@@ -55,12 +55,12 @@ $current_theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
             <form class="space-y-6" action="<?php echo url('/register'); ?>" method="POST">
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo translate('name', $current_lang); ?></label>
-                    <input type="text" id="name" name="name" required
+                    <input type="text" id="name" name="name" required autocomplete="off"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
                 </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300"><?php echo translate('email', $current_lang); ?></label>
-                    <input type="email" id="email" name="email" required
+                    <input type="email" id="email" name="email" required autocomplete="off"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
                 </div>
 
