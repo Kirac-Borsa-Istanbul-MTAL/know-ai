@@ -91,7 +91,7 @@ function renderSearch($current_lang)
                         
                         loadingSpinner.classList.remove('hidden');
 
-                        fetch('<?php echo url("/services/gemini/api.php"); ?>', {
+                        fetch('<?php echo url("/gemini"); ?>', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/x-www-form-urlencoded',
